@@ -1,0 +1,29 @@
+<h1>Tax form</h1>
+
+<form [formGroup]="taxForm" (onSubmit)="onCalculate()" class="tax-form">
+    <div class="tax-form--field incomeControl">
+        <label for="income">
+            <input type="text" placeholder="Enter income" formControlName="income" />
+            </label>
+        
+    </div>
+
+    <div class="tax-form--field frequencyControl">
+        <div class="frequencyControl--radio">
+            <input id="frequency" type="radio" value="Monthly" name="frequency" formControlName="frequency">
+            <label for="frequency">Monthly</label>
+        </div>
+        <div class="frequencyControl--radio">
+            <input id="frequency" type="radio" value="Yearly" name="frequency" formControlName="frequency">
+            <label for="frequency">Yearly</label>
+        </div>
+    </div>
+
+    <div class="tax-form--field zipCodeControl">
+        <label for="zipcode">
+            <input type="text" placeholder="Zip Code" formControlName="zipcode" />   
+        </label>
+    </div>
+
+    <button class="tax-form--button" type="submit" [disabled]="!taxForm.valid">Calculate</button>
+</form>

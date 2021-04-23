@@ -1,0 +1,27 @@
+input {
+    border: none;
+    border-bottom: 1px solid;
+    line-height: 25px;
+}
+
+
+.tax-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: flex-start;
+    max-width: 400px;
+}
+
+.tax-form--field {
+    margin: 5px 0;
+}
+
+.frequencyControl {
+    display: flex;
+    flex-direction: column;
+}
+
+.frequencyControl--radio {
+    margin: 5px 0;
+}
