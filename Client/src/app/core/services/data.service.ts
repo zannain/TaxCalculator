@@ -8,7 +8,7 @@ import { map, catchError } from 'rxjs/operators';
     providedIn: 'root'
 })
 export class DataService {
-    url = '/api/messages';
+    url = 'https://api.zippopotam.us/us/';
     constructor(private http: HttpClient) { }
 
     getMessage() : Observable<string> {
@@ -17,6 +17,11 @@ export class DataService {
                 map(res => res['data']),
                 catchError(this.handleError)
             );
+    }
+
+    getZipCode(zipCode) {
+        const endpoint = `${this.url}${zipCode}`;
+        return this.http.get(endpoint).pipe(map(res => res), catchError(this.handleError))
     }
 
     private handleError(error: HttpErrorResponse) {
