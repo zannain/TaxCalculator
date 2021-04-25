@@ -26,10 +26,12 @@ namespace Angular_ASPNET_Core_Seed
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddMvc();
             services.AddControllersWithViews();
+            services.AddControllers().AddNewtonsoftJson();
 
-            // Handle XSRF Name for Header
-            services.AddAntiforgery(options => {
+      // Handle XSRF Name for Header
+      services.AddAntiforgery(options => {
                 options.HeaderName = "X-XSRF-TOKEN";
             });
 
