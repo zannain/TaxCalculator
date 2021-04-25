@@ -1,28 +1,28 @@
 ﻿<Properties StartupConfiguration="{BC53555D-71A8-435D-AC11-549C950E3391}|Default">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Apis/TaxController.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Startup.cs">
     <Files>
-      <File FileName="Models/CalculatedTax.cs" Line="1" Column="1" />
-      <File FileName="Models/TaxFormRequest.cs" Line="1" Column="1" />
-      <File FileName="Models/TaxFormulaEnum.cs" Line="1" Column="1" />
-      <File FileName="Models/TaxBracket.cs" Line="1" Column="1" />
-      <File FileName="Models/ErrorViewModel.cs" Line="1" Column="1" />
-      <File FileName="Models/CalculatedBracket.cs" Line="1" Column="1" />
-      <File FileName="seed.cs" Line="10" Column="28" />
-      <File FileName="Apis/TaxController.cs" Line="22" Column="46" />
+      <File FileName="Interfaces/ITaxBracketService.cs" Line="10" Column="49" />
+      <File FileName="Services/CalculateService.cs" Line="29" Column="1" />
+      <File FileName="Models/TaxForm.cs" Line="10" Column="22" />
+      <File FileName="Data/SeedData.cs" Line="41" Column="34" />
+      <File FileName="Startup.cs" Line="25" Column="9" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
           <Node name="Angular-ASPNET-Core-Seed" expanded="True">
             <Node name="Angular-ASPNET-Core-Seed" expanded="True">
-              <Node name="Dependencies" expanded="True">
-                <Node name="FrameworkReferences" expanded="True" />
-                <Node name="PackageDependencies" expanded="True" />
-              </Node>
-              <Node name="Services" selected="True" />
+              <Node name="Apis" expanded="True" />
+              <Node name="Data" expanded="True" />
+              <Node name="Interfaces" expanded="True" />
+              <Node name="Services" expanded="True" />
+              <Node name="Startup.cs" selected="True" />
             </Node>
           </Node>
         </State>
+      </Pad>
+      <Pad Id="MonoDevelop.Debugger.WatchPad">
+        <State />
       </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>
@@ -30,7 +30,9 @@
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore />
+    <BreakpointStore>
+      <Breakpoint file="/Users/zannain/workspace/autosoft/Angular-ASPNET-Core-Seed/Services/CalculateService.cs" relfile="Services/CalculateService.cs" line="26" column="1" />
+    </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MultiItemStartupConfigurations />
 </Properties>

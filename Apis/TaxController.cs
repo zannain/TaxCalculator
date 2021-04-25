@@ -9,6 +9,11 @@ using Microsoft.AspNetCore.Http;
 using System.IO;
 using System.Text;
 using AngularASPNETCoreSeed.Models;
+using AngularASPNETCoreSeed.Data;
+using AngularASPNETCoreSeed.Data.Repository;
+using AngularASPNETCoreSeed.Data.Contracts;
+using AngularASPNETCoreSeed.Services;
+using AngularASPNETCoreSeed.Interfaces;
 
 namespace Angular_ASPNETCore_Seed.Apis
 {
@@ -16,39 +21,49 @@ namespace Angular_ASPNETCore_Seed.Apis
   [ApiController]
   public class TaxController : Controller
     {
-        [HttpPost]
+
+    private ITaxBracketService _calculator;
+
+    public TaxController(ITaxBracketService calculator)
+    {
+      _calculator = calculator;
+    }
+
+    [HttpPost]
         public async Task<IActionResult> GetTax([FromBody]TaxForm body)
         {
-            List<TaxBracket> brackets = Tax.SeedData();
-            List<TaxBracket> sortedBrackets = (from bracket in brackets
-                                        orderby bracket.LowerRange
-                                        select bracket).ToList();
-              List<double> excludeFixedRateBracket = (from bracket in sortedBrackets
-                                          where bracket.LowerRange != 0
-                                          select bracket.LowerRange).ToList();
-            if (body.State == "CA" || body.State == "VA" || body.State == "NY")
-            {
-              if (body.Income > excludeFixedRateBracket.First())
-              {
-                CalculatedTax response = Tax.CalculateProgressiveTax(body.Income, sortedBrackets);
-                return Ok(response);
-              }
-              else
-              {
-                CalculatedTax response = new CalculatedTax();
-                response.Formula = TaxFormulas.FixedRate;
-                var fixedRate = sortedBrackets.First();
-                response.Tax = fixedRate.Rate;
-                return Ok(response);
-              }
-            }
-            else
-            {
-              CalculatedTax response = new CalculatedTax();
-              response.Formula = TaxFormulas.FlatTax;
-              response.Tax = Tax.FlatTax();
-              return Ok(response);
-            }
-        }
+            CalculatedTax response = _calculator.CalculateAllBrackets(body);
+            return Ok(response);
+            //List<TaxBracket> brackets = _taxBracketRepository.GetAll().ToList();
+            //List < TaxBracket > sortedBrackets = (from bracket in brackets
+            //                                      orderby bracket.LowerRange
+            //                                      select bracket).ToList();
+            //  List<double> excludeFixedRateBracket = (from bracket in sortedBrackets
+            //                              where bracket.LowerRange != 0
+            //                              select bracket.LowerRange).ToList();
+            //if (body.State == "CA" || body.State == "VA" || body.State == "NY")
+            //{
+            //  if (body.Income > excludeFixedRateBracket.First())
+            //  {
+            //    CalculatedTax response = Tax.CalculateProgressiveTax(body.Income, sortedBrackets);
+            //    return Ok(response);
+            //  }
+            //  else
+            //  {
+            //    CalculatedTax response = new CalculatedTax();
+            //    response.Formula = TaxFormulas.FixedRate;
+            //    var fixedRate = sortedBrackets.First();
+            //    response.Tax = fixedRate.Rate;
+            //    return Ok(response);
+            //  }
+            //}
+            //else
+            //{
+            //  CalculatedTax response = new CalculatedTax();
+            //  response.Formula = TaxFormulas.FlatTax;
+            //  response.Tax = Tax.FlatTax();
+            //  return Ok(response);
+            //}
+    }
     }
 }

@@ -11,6 +11,12 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using AngularASPNETCoreSeed.Data;
+using Microsoft.EntityFrameworkCore;
+using AngularASPNETCoreSeed.Data.Contracts;
+using AngularASPNETCoreSeed.Data.Repository;
+using AngularASPNETCoreSeed.Interfaces;
+using AngularASPNETCoreSeed.Services;
 
 namespace Angular_ASPNET_Core_Seed
 {
@@ -29,7 +35,9 @@ namespace Angular_ASPNET_Core_Seed
             services.AddMvc();
             services.AddControllersWithViews();
             services.AddControllers().AddNewtonsoftJson();
-
+            services.AddScoped<ITaxBracketRepository, TaxBracketRepository>();
+            services.AddScoped<ITaxBracketService, CalculateService>();
+      services.AddDbContext<CalculatorDBContext>(options => options.UseInMemoryDatabase(databaseName: "TaxCalculator"));
       // Handle XSRF Name for Header
       services.AddAntiforgery(options => {
                 options.HeaderName = "X-XSRF-TOKEN";

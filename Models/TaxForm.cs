@@ -7,7 +7,7 @@ namespace Angular_ASPNETCore_Seed.Models
 {
     public class TaxForm
     {
-        public int Income { get; set; }
+        public double Income { get; set; }
         public string State { get; set; }
         public string Frequency { get; set; }
     }
