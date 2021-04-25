@@ -1,15 +1,17 @@
+
+
 input {
+    font-size: var(--text-sm);
     border: none;
     border-bottom: 1px solid;
     line-height: 25px;
 }
 
-
 .tax-form {
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
-    align-items: flex-start;
+    align-items: center;
     max-width: 400px;
 }
 

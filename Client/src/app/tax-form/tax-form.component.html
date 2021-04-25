@@ -1,29 +1,37 @@
-<h1>Tax form</h1>
-
-<form [formGroup]="taxForm" (onSubmit)="onCalculate()" class="tax-form">
-    <div class="tax-form--field incomeControl">
-        <label for="income">
-            <input type="text" placeholder="Enter income" formControlName="income" />
+<div class="container mx-auto">
+    <form [formGroup]="taxForm" (ngSubmit)="onCalculate()" class="tax-form">
+        <div class="tax-form--field incomeControl">
+            <label for="income">
+                <input type="text" placeholder="Enter income" formControlName="income" mvndrMatCurrencyFormat
+                    [allowNegative]="false" [currencyCode]="'USD'" />
             </label>
-        
-    </div>
 
-    <div class="tax-form--field frequencyControl">
-        <div class="frequencyControl--radio">
-            <input id="frequency" type="radio" value="Monthly" name="frequency" formControlName="frequency">
-            <label for="frequency">Monthly</label>
         </div>
-        <div class="frequencyControl--radio">
-            <input id="frequency" type="radio" value="Yearly" name="frequency" formControlName="frequency">
-            <label for="frequency">Yearly</label>
+
+        <div class="tax-form--field frequencyControl">
+            <ng-container *ngFor="let choice of frequencyValues">
+                <div class="frequencyControl--radio">
+                    <input id="frequency" type="radio" [value]="choice" name="frequency" formControlName="frequency">
+                    <label for="frequency">{{choice}}</label>
+                </div>
+            </ng-container>
         </div>
-    </div>
 
-    <div class="tax-form--field zipCodeControl">
-        <label for="zipcode">
-            <input type="text" placeholder="Zip Code" formControlName="zipcode" />   
-        </label>
-    </div>
+        <div class="tax-form--field zipCodeControl">
+            <label for="zipcode">
+                <input type="text" placeholder="Zip Code" formControlName="zipcode" />
+            </label>
+        </div>
 
-    <button class="tax-form--button" type="submit" [disabled]="!taxForm.valid">Calculate</button>
-</form>
+        <button class="tax-form--button" type="submit">Calculate</button>
+    </form>
+
+    <ng-container *ngIf="calculatedTax">
+        <h1 class="md-text">Tax</h1>
+        <h2 class="sm-text">{{calculatedTax?.tax}}</h2>
+        <h1 class="md-text">Tax Formula</h1>
+        <h2 class="sm-text">{{calculatedTax?.formula}}</h2>
+        <h1 class="md-text">State</h1>
+        <h2 class="sm-text">{{state}}</h2>
+    </ng-container>
+</div>
