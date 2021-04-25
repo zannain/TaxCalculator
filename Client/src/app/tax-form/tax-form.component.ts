@@ -19,9 +19,9 @@ export class TaxFormComponent implements OnInit {
   public taxForm: FormGroup;
   public frequencyValues = Object.values(this.frequency).filter( e => typeof( e ) == "string" );
   public formulaValues = Object.values(Formulas).filter( e => typeof( e ) == "string" );
-  get zipCodeControl() { return this.taxForm.controls.zipcode; }
-  get incomeControl() { return this.taxForm.controls.income; }
-  get frequencyControl() { return this.taxForm.controls.frequency; }
+  get zip() { return this.taxForm.get('zipcode'); }
+  get income() { return this.taxForm.get('income'); }
+  get frequencyControl() { return this.taxForm.get('frequency'); }
   constructor(private dataService: DataService) {}
 
   ngOnInit(): void {
@@ -30,25 +30,42 @@ export class TaxFormComponent implements OnInit {
       frequency: new FormControl('', [Validators.required]),
       zipcode: new FormControl('', [Validators.required, Validators.max(5)]),
     });
-
-    this.zipCodeControl.valueChanges.subscribe((value) => {
-      if (value.length === 5) {
-        this.dataService.getZipCode(value).subscribe((res) => {
+    this.taxForm.valueChanges.subscribe(form => {
+      this.calculatedTax = null;
+    })
+    this.zip.valueChanges.subscribe(zipCode => {
+      if (zipCode?.length === 5) {
+        this.dataService.getZipCode(zipCode).subscribe((res) => {
+          console.log({res})
           if (res.places.length > 0) {
             this.zipCodeViewModel = res;
-            this.state = this.zipCodeViewModel?.places[0]['state abbreviation'];
+            this.state = this.zipCodeViewModel?.places[0]['state'];
           }
         });
       }
-    });
+    })
+    
+}
+  retrieveState() {
+    let zipCode = this.zip.value;
+    if (zipCode.length === 5) {
+      this.dataService.getZipCode(zipCode).subscribe((res) => {
+        if (res.places.length > 0) {
+          this.zipCodeViewModel = res;
+          this.state = this.zipCodeViewModel?.places[0]['state'];
+        }
+      });
+    }
   }
-
   onCalculate() {
+    this.calculatedTax = null;
     let response = new TaxFormViewModel();
     response.state = this.zipCodeViewModel?.places[0]['state abbreviation'];
     response.frequency = this.frequencyControl.value;
-    response.income = this.incomeControl.value;
+    response.income = this.income.value;
     this.dataService.getTax(response).subscribe(res => {
+      this.taxForm.reset()
+      console.log({res})
       const { formula } = res;
       res.formula = this.formulaValues[formula]
       this.calculatedTax = res;

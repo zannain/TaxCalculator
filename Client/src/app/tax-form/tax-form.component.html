@@ -1,37 +1,69 @@
-<div class="container mx-auto">
-    <form [formGroup]="taxForm" (ngSubmit)="onCalculate()" class="tax-form">
-        <div class="tax-form--field incomeControl">
-            <label for="income">
-                <input type="text" placeholder="Enter income" formControlName="income" mvndrMatCurrencyFormat
-                    [allowNegative]="false" [currencyCode]="'USD'" />
-            </label>
+<div class="container">
+    <div class="tax-form-wrapper">
+        <form [formGroup]="taxForm" (ngSubmit)="onCalculate()" class="tax-form">
+            <div class="tax-form--field incomeControl">
+                <label for="income">
+                    <input type="text" placeholder="Enter income" formControlName="income" mvndrMatCurrencyFormat
+                        [allowNegative]="false" [currencyCode]="'USD'" />
+                </label>
 
-        </div>
+            </div>
 
-        <div class="tax-form--field frequencyControl">
-            <ng-container *ngFor="let choice of frequencyValues">
-                <div class="frequencyControl--radio">
-                    <input id="frequency" type="radio" [value]="choice" name="frequency" formControlName="frequency">
-                    <label for="frequency">{{choice}}</label>
-                </div>
-            </ng-container>
-        </div>
+            <div class="tax-form--field frequencyControl">
+                <ng-container *ngFor="let choice of frequencyValues">
+                    <div class="frequencyControl--radio">
+                        <input id="frequency" type="radio" [value]="choice" name="frequency"
+                            formControlName="frequency">
+                        <label for="frequency">{{choice}}</label>
+                    </div>
+                </ng-container>
+            </div>
 
-        <div class="tax-form--field zipCodeControl">
-            <label for="zipcode">
-                <input type="text" placeholder="Zip Code" formControlName="zipcode" />
-            </label>
-        </div>
+            <div class="tax-form--field zipCodeControl">
+                <label for="zipcode">
+                    <input type="text" placeholder="Zip Code" formControlName="zipcode" />
+                </label>
+            </div>
 
-        <button class="tax-form--button" type="submit">Calculate</button>
-    </form>
+            <button class="tax-form--button primary-btn" type="submit">Calculate</button>
+        </form>
+    </div>
 
     <ng-container *ngIf="calculatedTax">
-        <h1 class="md-text">Tax</h1>
-        <h2 class="sm-text">{{calculatedTax?.tax}}</h2>
-        <h1 class="md-text">Tax Formula</h1>
-        <h2 class="sm-text">{{calculatedTax?.formula}}</h2>
-        <h1 class="md-text">State</h1>
-        <h2 class="sm-text">{{state}}</h2>
+        <div class="tax-summary-wrapper">
+            <div class="flex-row">
+                <h1 class="md-text-bold">State</h1>
+                <h2 class="sm-text">{{state}}</h2>
+            </div>
+            <div class="flex-row">
+                <h1 class="md-text-bold">Tax Formula</h1>
+                <h2 class="sm-text">{{calculatedTax?.formula}}</h2>
+            </div>
+            <ng-container [ngSwitch]="calculatedTax?.formula">
+                <div *ngSwitchCase="'Progressive'">
+                    <div class="xs-text breakdown"
+                        *ngFor="let bracket of calculatedTax?.calculatedBrackets; index as i; first as fixedRate">
+                        <div *ngIf="fixedRate" class="flex-row">
+                            <h2 class="sm-text">
+                                {{bracket.bracket['lowerRange'] | currency}} to
+                                {{bracket.bracket['upperRange'] | currency }} taxed at fixed rate of
+                            </h2> 
+                            <h2 class="sm-text">{{bracket.bracket['rate'] | currency}}</h2>
+                        </div>
+                        <div *ngIf="!fixedRate" class="flex-row">
+                            <h2 class="sm-text">
+                                {{bracket.bracket['lowerRange'] | currency}} to
+                                {{bracket.bracket['upperRange'] | currency }} at {{bracket.bracket['rate'] | percent}} is
+                            </h2> 
+                            <h2 class="sm-text"> {{bracket.amount | currency}}</h2>
+                        </div>
+                    </div>
+                </div>
+            </ng-container>
+            <div class="flex-row">
+                <h1 class="md-text-bold"><strong>Total Tax:</strong></h1>
+                <h2 class="lg-text-bold">{{calculatedTax?.tax | currency }}</h2>
+            </div>
+        </div>
     </ng-container>
 </div>

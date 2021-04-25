@@ -1,7 +1,5 @@
-@import 'tailwindcss/base';
-@import 'tailwindcss/components';
-@import 'tailwindcss/utilities';
 /* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap');
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
@@ -28,14 +26,53 @@ time, mark, audio, video {
     --text-sm: 14px;
     --text-md: 16px;
     --text-lg: 18px;
+    --primary-btn-color: #7bae7f;
+    --white: #fceff9;
+    --black: #454851;
   }
-
+html, body, * {
+    font-family: 'Roboto Mono', monospace;    
+}
+.container{
+    max-width: 960px;
+    margin: 20px;
+    padding-right: 10px;
+    padding-left: 10px;
+  }
+.flex-row {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    min-width: 450px;
+    margin: 10px 0;
+}
+.primary-btn {
+    background-color: var(--primary-btn-color);
+    color: var(--black);
+    font-size: var(--text-sm);
+    font-weight: 600;
+    border: 1px solid var(--primary-btn-color);
+    width: 125px;
+    height: 35px;
+    border-radius: 50px;
+}
+.xs-text {
+    font-size: var(--text-xs);
+}
 .sm-text {
     font-size: var(--text-sm);
 }
 .md-text {
     font-size: var(--text-md);
 }
-.lg-text {
+.bold {
+    font-weight: 600;
+}
+.md-text-bold {
+    font-size: var(--text-md);
+    font-weight: 600;
+}
+.lg-text-bold {
     font-size: var(--text-lg);
+    font-weight: 600;
 }

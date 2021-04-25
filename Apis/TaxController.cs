@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using System.IO;
 using System.Text;
+using AngularASPNETCoreSeed.Models;
 
 namespace Angular_ASPNETCore_Seed.Apis
 {
@@ -16,7 +17,7 @@ namespace Angular_ASPNETCore_Seed.Apis
   public class TaxController : Controller
     {
         [HttpPost]
-        public async Task<IActionResult> GetTax([FromBody]TaxFormRequest body)
+        public async Task<IActionResult> GetTax([FromBody]TaxForm body)
         {
             List<TaxBracket> brackets = Tax.SeedData();
             List<TaxBracket> sortedBrackets = (from bracket in brackets
@@ -29,12 +30,12 @@ namespace Angular_ASPNETCore_Seed.Apis
             {
               if (body.Income > excludeFixedRateBracket.First())
               {
-                TaxFormResponse response = Tax.CalculateProgressiveTax(body.Income, sortedBrackets);
+                CalculatedTax response = Tax.CalculateProgressiveTax(body.Income, sortedBrackets);
                 return Ok(response);
               }
               else
               {
-                TaxFormResponse response = new TaxFormResponse();
+                CalculatedTax response = new CalculatedTax();
                 response.Formula = TaxFormulas.FixedRate;
                 var fixedRate = sortedBrackets.First();
                 response.Tax = fixedRate.Rate;
@@ -43,7 +44,7 @@ namespace Angular_ASPNETCore_Seed.Apis
             }
             else
             {
-              TaxFormResponse response = new TaxFormResponse();
+              CalculatedTax response = new CalculatedTax();
               response.Formula = TaxFormulas.FlatTax;
               response.Tax = Tax.FlatTax();
               return Ok(response);

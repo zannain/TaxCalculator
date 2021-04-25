@@ -1,11 +1,14 @@
 ﻿<Properties StartupConfiguration="{BC53555D-71A8-435D-AC11-549C950E3391}|Default">
   <MonoDevelop.Ide.Workbench ActiveDocument="Apis/TaxController.cs">
     <Files>
-      <File FileName="Apis/MessagesController.cs" Line="25" Column="49" />
-      <File FileName="Angular-ASPNET-Core-Seed.csproj" Line="1" Column="1" />
-      <File FileName="Startup.cs" Line="78" Column="1" />
-      <File FileName="seed.cs" Line="29" Column="20" />
-      <File FileName="Models/TaxFormResponse.cs" Line="18" Column="16" />
+      <File FileName="Models/CalculatedTax.cs" Line="1" Column="1" />
+      <File FileName="Models/TaxFormRequest.cs" Line="1" Column="1" />
+      <File FileName="Models/TaxFormulaEnum.cs" Line="1" Column="1" />
+      <File FileName="Models/TaxBracket.cs" Line="1" Column="1" />
+      <File FileName="Models/ErrorViewModel.cs" Line="1" Column="1" />
+      <File FileName="Models/CalculatedBracket.cs" Line="1" Column="1" />
+      <File FileName="seed.cs" Line="10" Column="28" />
+      <File FileName="Apis/TaxController.cs" Line="22" Column="46" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
@@ -13,18 +16,13 @@
           <Node name="Angular-ASPNET-Core-Seed" expanded="True">
             <Node name="Angular-ASPNET-Core-Seed" expanded="True">
               <Node name="Dependencies" expanded="True">
+                <Node name="FrameworkReferences" expanded="True" />
                 <Node name="PackageDependencies" expanded="True" />
               </Node>
-              <Node name="Apis" expanded="True">
-                <Node name="TaxController.cs" selected="True" />
-              </Node>
-              <Node name="Models" expanded="True" />
+              <Node name="Services" selected="True" />
             </Node>
           </Node>
         </State>
-      </Pad>
-      <Pad Id="MonoDevelop.Debugger.WatchPad">
-        <State />
       </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>
