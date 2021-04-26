@@ -1,12 +1,11 @@
 ﻿<Properties StartupConfiguration="{BC53555D-71A8-435D-AC11-549C950E3391}|Default">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Angular-ASPNET-Core-Seed.csproj">
+  <MonoDevelop.Ide.Workbench ActiveDocument="README.md">
     <Files>
-      <File FileName="Interfaces/ITaxBracketService.cs" Line="10" Column="49" />
-      <File FileName="Services/CalculateService.cs" Line="32" Column="10" />
-      <File FileName="Models/TaxForm.cs" />
-      <File FileName="Data/SeedData.cs" />
-      <File FileName="Startup.cs" />
-      <File FileName="Angular-ASPNET-Core-Seed.csproj" Line="4" Column="23" />
+      <File FileName="Angular-ASPNET-Core-Seed.csproj" Line="1" Column="1" />
+      <File FileName="appsettings.json" Line="1" Column="1" />
+      <File FileName="Startup.cs" Line="110" Column="1" />
+      <File FileName="appsettings.Development.json" Line="1" Column="1" />
+      <File FileName="README.md" Line="33" Column="1" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
@@ -14,7 +13,10 @@
           <Node name="Angular-ASPNET-Core-Seed" expanded="True">
             <Node name="Angular-ASPNET-Core-Seed" expanded="True">
               <Node name="Apis" expanded="True" />
-              <Node name="Angular-ASPNET-Core-Seed.csproj" selected="True" />
+              <Node name="Views" expanded="True" />
+              <Node name="wwwroot" expanded="True" />
+              <Node name="appsettings.json" expanded="True" />
+              <Node name="README.md" selected="True" />
             </Node>
           </Node>
         </State>
