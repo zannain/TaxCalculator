@@ -1,27 +1,32 @@
-# Client
+# Tax Calculator
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.1.6.
+## Technology Stack
 
-## Development server
+- __Front end__: Angular 9.1.13
+- __Back end__: .NET Core 3.1
+- __Database__: Entity Framework In-Memory Database
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+## Run Project
 
-## Code scaffolding
+### Start Angular Application
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+1. Clone repository
+2. Navigate to the `Client` directory and install packages
+3. Run start script
 
-## Build
+```
+git clone https://github.com/zannain/TaxCalculator.git
+cd TaxCalculator/Client
+npm install
+ng serve -o
+```
+### Start .NET Core Application
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+__Starting at the root directory of the repository__
+1. Restory, build and run project using dotnet CLI
 
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+```
+dotnet restore
+dotnet build
+dotnet watch run
+```

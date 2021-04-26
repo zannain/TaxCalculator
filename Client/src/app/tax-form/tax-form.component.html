@@ -6,7 +6,6 @@
                     <input type="text" placeholder="Enter income" formControlName="income" mvndrMatCurrencyFormat
                         [allowNegative]="false" [currencyCode]="'USD'" />
                 </label>
-
             </div>
 
             <div class="tax-form--field frequencyControl">
@@ -31,38 +30,38 @@
 
     <ng-container *ngIf="calculatedTax">
         <div class="tax-summary-wrapper">
-            <div class="flex-row">
-                <h1 class="md-text-bold">State</h1>
-                <h2 class="sm-text">{{state}}</h2>
+            <div role="heading" aria-level="2" aria-labelledby="stateTitle state"  class="flex-row">
+                <p class="md-text-bold" id="stateTitle">State</p>
+                <p class="sm-text" id="state">{{state}}</p>
             </div>
-            <div class="flex-row">
-                <h1 class="md-text-bold">Tax Formula</h1>
-                <h2 class="sm-text">{{calculatedTax?.formula}}</h2>
+            <div role="heading" aria-level="2" aria-labelledby="taxFormulaLabel taxFormula" class="flex-row">
+                <p class="md-text-bold" id="taxFormulaLabel">Tax Formula</p>
+                <p class="sm-text" id="taxFormula">{{calculatedTax?.formula}}</p>
             </div>
             <ng-container [ngSwitch]="calculatedTax?.formula">
                 <div *ngSwitchCase="'Progressive'">
                     <div class="xs-text breakdown"
                         *ngFor="let bracket of calculatedTax?.calculatedBrackets; index as i; first as fixedRate">
-                        <div *ngIf="fixedRate" class="flex-row">
-                            <h2 class="sm-text">
+                        <div role="heading" aria-level="2" aria-labelledby="firstBracket firstBracketAmount" *ngIf="fixedRate" class="flex-row">
+                            <p class="sm-text" id="firstBracket">
                                 {{bracket.bracket['lowerRange'] | currency}} to
                                 {{bracket.bracket['upperRange'] | currency }} taxed at fixed rate of
-                            </h2> 
-                            <h2 class="sm-text">{{bracket.bracket['rate'] | currency}}</h2>
+                            </p> 
+                            <p class="sm-text" id="firstBracketAmount">{{bracket.bracket['rate'] | currency}}</p>
                         </div>
-                        <div *ngIf="!fixedRate" class="flex-row">
-                            <h2 class="sm-text">
+                        <div role="heading" aria-level="2" aria-labelledby="brackets taxableBracketAmount" *ngIf="!fixedRate" class="flex-row">
+                            <p class="sm-text" id="brackets">
                                 {{bracket.bracket['lowerRange'] | currency}} to
                                 {{bracket.bracket['upperRange'] | currency }} at {{bracket.bracket['rate'] | percent}} is
-                            </h2> 
-                            <h2 class="sm-text"> {{bracket.amount | currency}}</h2>
+                            </p> 
+                            <p class="sm-text" id="taxableBracketAmount"> {{bracket.amount | currency}}</p>
                         </div>
                     </div>
                 </div>
             </ng-container>
-            <div class="flex-row">
-                <h1 class="md-text-bold"><strong>Total Tax:</strong></h1>
-                <h2 class="lg-text-bold">{{calculatedTax?.tax | currency }}</h2>
+            <div role="heading" aria-level="2" aria-labelledby="totalTaxLabel totalTax" class="flex-row">
+                <p class="md-text-bold" id="totalTaxLabel"><strong>Total Tax:</strong></p>
+                <p class="lg-text-bold" id="totalTax">{{calculatedTax?.tax | currency }}</p>
             </div>
         </div>
     </ng-container>
